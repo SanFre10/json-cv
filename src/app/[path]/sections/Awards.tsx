@@ -1,6 +1,6 @@
 import React from 'react';
 import CvSection from './CvSection';
-import { CV } from '@/cv.d';
+import { type CV } from '@/cv.d';
 
 export default function Basics({ cv }: { cv: CV }) {
 	return (
