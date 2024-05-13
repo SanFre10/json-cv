@@ -6,7 +6,7 @@ settings:
 
 dependencies:
   mongodb:
-    specifier: ^6.6.1
+    specifier: 6.6.1
     version: 6.6.1
   next:
     specifier: 14.2.3

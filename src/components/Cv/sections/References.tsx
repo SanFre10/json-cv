@@ -1,14 +1,14 @@
 import React from 'react';
 import CvSection from './CvSection';
-import { type CV } from '@/cv.d';
+import { type CV } from '@/types/cv.d';
 
 export default function Basics({ cv }: { cv: CV }) {
 	return (
 		<CvSection>
-			<h2>Languages</h2>
+			<h2>References</h2>
 			<div>
-				<p>Language: {cv.languages[0].language}</p>
-				<p>Fluency: {cv.languages[0].fluency}</p>
+				<p>Name: {cv.references[0].name}</p>
+				<p>Reference: {cv.references[0].reference}</p>
 			</div>
 		</CvSection>
 	);
