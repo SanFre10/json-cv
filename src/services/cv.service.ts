@@ -16,4 +16,17 @@ export class CvService {
         const data = (await collections.cv?.findOne({ path: path })) as CvDto;
         return data.data;
     };
+
+    saveCv = async (path: string, passphrase: string, data: CV) => {
+        if(!collections.cv)
+            await connectToDatabase();
+        
+        const cv = await collections.cv?.updateOne(
+            { path: path },
+            { $set: { passphrase: passphrase, data: data } },
+            { upsert: true }
+        )
+        return cv;
+    }
+        
 }
