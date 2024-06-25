@@ -4,9 +4,14 @@ import React, { useState } from 'react';
 import Cv from '@/components/Cv/Cv';
 import { CV } from '@/types/cv';
 
+import { cvSchema } from '@/schemas/cvSchema';
+
+import jonhdoe from '@/jonhdoe.json';
+import empty from '@/empty.json';
+
 export default function Page() {
-	const [cvData, setCvData] = useState({} as CV);
-	const [textareaValue, setTextareaValue] = useState('');
+	const [cvData, setCvData] = useState(empty as CV);
+	const [textareaValue, setTextareaValue] = useState(JSON.stringify(empty, null, 2));
 	const [error, setError] = useState('');
 
 	const handleTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -14,11 +19,12 @@ export default function Page() {
 		setTextareaValue(newValue);
 		try {
 			const parsedData = JSON.parse(newValue);
+			cvSchema.parse(parsedData); //zod validation
 			setCvData(parsedData);
 			setError('');
 		} catch (error) {
 			console.error('Invalid JSON');
-			setError('Invalid JSON');
+			setError(error.message);
 		}
 	};
 
@@ -44,6 +50,11 @@ export default function Page() {
 		});
 	};
 
+	const handleResetClick = () => {
+		setTextareaValue(JSON.stringify(empty, null, 2));
+		setCvData(empty);
+	};
+
 	return (
 		<>
 			<main className="flex h-screen">
@@ -51,6 +62,10 @@ export default function Page() {
 					<Cv cv={cvData} />
 				</div>
 				<div className="flex-1 m-10">
+					<button onClick={handleResetClick} className="btn btn-warning">
+						Reset
+					</button>
+					<h3>{error}</h3>
 					<textarea
 						className={`w-full h-full p-10 rounded-lg border focus:outline-none ${error ? 'border-red-700' : ''}`}
 						spellCheck={false}
