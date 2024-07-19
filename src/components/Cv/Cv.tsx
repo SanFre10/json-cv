@@ -15,10 +15,10 @@ import Projects from '@/components/Cv/sections/Projects';
 
 export default function Cv({ cv }: { cv: CV }) {
 	return (
-		<main>
+		<div data-theme="cvTheme1" className="max-w-[1000px] mx-auto p-10 font-mono">
 			{cv.basics && <Basics basics={cv.basics}></Basics>}
 			{cv.work && <Work work={cv.work}></Work>}
-			{cv.volunteer && <Volunteer volunteer={cv.volunteer}></Volunteer>}
+			{/* {cv.volunteer && <Volunteer volunteer={cv.volunteer}></Volunteer>}
 			{cv.education && <Education education={cv.education}></Education>}
 			{cv.awards && <Awards awards={cv.awards}></Awards>}
 			{cv.certificates && <Certificates certificates={cv.certificates}></Certificates>}
@@ -27,7 +27,7 @@ export default function Cv({ cv }: { cv: CV }) {
 			{cv.languages && <Languages languages={cv.languages}></Languages>}
 			{cv.interests && <Interests interests={cv.interests}></Interests>}
 			{cv.references && <References references={cv.references}></References>}
-			{cv.projects && <Projects projects={cv.projects}></Projects>}
-		</main>
+			{cv.projects && <Projects projects={cv.projects}></Projects>} */}
+		</div>
 	);
 }

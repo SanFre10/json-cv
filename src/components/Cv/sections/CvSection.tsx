@@ -1,13 +1,9 @@
-import React from "react";
+import React from 'react';
 
 export default function CvSection({
-    children
+	children,
 }: Readonly<{
-    children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-    return (
-        <section>
-            {children}
-        </section>
-    )
+	return <section className="mb-5">{children}</section>;
 }

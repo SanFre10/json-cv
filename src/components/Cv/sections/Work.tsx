@@ -5,16 +5,22 @@ import { type CV } from '@/types/cv.d';
 export default function Work({ work }: { work: CV['work'] }) {
 	return (
 		<CvSection>
-			<h2>Work Experience</h2>
-			<div>
-				<p>Company: {work[0].name}</p>
-				<p>Position: {work[0].position}</p>
-				<p>Summary: {work[0].summary}</p>
-				<p>Highlights:</p>
-				<ul>
-					<li>{work[0].highlights[0]}</li>
-				</ul>
-			</div>
+			<h2 className="text-3xl text-primary font-bold">Work Experience</h2>
+
+			{work &&
+				work.map(({ name, position, summary, highlights, url, startDate, endDate }, index) => (
+					<article key={index}>
+						<h3>{name}</h3>
+						<p>Position: {position}</p>
+						<p>Summary: {summary}</p>
+
+						{highlights && (
+							<ul>
+								<li>{highlights[0]}</li>
+							</ul>
+						)}
+					</article>
+				))}
 		</CvSection>
 	);
 }
