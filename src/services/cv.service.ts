@@ -1,4 +1,4 @@
-import { collections, connectToDatabase } from "@/lib/mongodb";
+import { client, connectToDatabase, collections } from "@/lib/mongodb";
 import { CV } from "@/types/cv";
 import { ObjectId } from "mongodb";
 
@@ -10,23 +10,35 @@ interface CvDto {
 
 export class CvService {
     getCv = async (path: string) => {
-        if(!collections.cv)
+        try {
             await connectToDatabase();
-        
-        const data = (await collections.cv?.findOne({ path: path })) as CvDto;
-        return data.data;
+            const data = (await collections.cv?.findOne({ path: path })) as CvDto;
+            return data.data;
+        }
+        catch (e) {
+            console.error(e);
+        }
+        finally{
+            client.close();
+        }
     };
 
-    saveCv = async (path: string, passphrase: string, data: CV) => {
-        if(!collections.cv)
+    saveCv = async (path: string, passphrase: string, data: CV) => {        
+        try {
             await connectToDatabase();
-        
-        const cv = await collections.cv?.updateOne(
-            { path: path },
-            { $set: { passphrase: passphrase, data: data } },
-            { upsert: true }
-        )
-        return cv;
+            const cv = (await collections.cv?.updateOne(
+                { path: path },
+                { $set: { passphrase: passphrase, data: data } },
+                { upsert: true }
+            ))
+            return cv;
+        }
+        catch (e) {
+            console.error(e);
+        }
+        finally{
+            client.close();
+        }
     }
         
 }
