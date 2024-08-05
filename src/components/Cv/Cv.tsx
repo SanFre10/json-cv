@@ -15,19 +15,19 @@ import Projects from '@/components/Cv/sections/Projects';
 
 export default function Cv({ cv }: { cv: CV }) {
 	return (
-		<div data-theme="cvTheme1" className="max-w-[1000px] mx-auto p-10 font-mono">
+		<div data-theme="cvTheme1" className="max-w-[1000px] p-10 font-mono rounded select-none">
 			{cv.basics && <Basics basics={cv.basics}></Basics>}
 			{cv.work && <Work work={cv.work}></Work>}
-			{/* {cv.volunteer && <Volunteer volunteer={cv.volunteer}></Volunteer>}
+			{cv.volunteer && <Volunteer volunteer={cv.volunteer}></Volunteer>}
 			{cv.education && <Education education={cv.education}></Education>}
 			{cv.awards && <Awards awards={cv.awards}></Awards>}
 			{cv.certificates && <Certificates certificates={cv.certificates}></Certificates>}
+			{cv.projects && <Projects projects={cv.projects}></Projects>}
 			{cv.publications && <Publications publications={cv.publications}></Publications>}
 			{cv.skills && <Skills skills={cv.skills}></Skills>}
 			{cv.languages && <Languages languages={cv.languages}></Languages>}
 			{cv.interests && <Interests interests={cv.interests}></Interests>}
 			{cv.references && <References references={cv.references}></References>}
-			{cv.projects && <Projects projects={cv.projects}></Projects>} */}
 		</div>
 	);
 }

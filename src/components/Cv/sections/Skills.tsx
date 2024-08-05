@@ -1,16 +1,16 @@
-import React from 'react';
-import CvSection from './CvSection';
+import CvSection from '../CvSection';
 import { type CV } from '@/types/cv.d';
+import Article from '../Article';
 
 export default function Skills({ skills }: { skills: CV['skills'] }) {
 	return (
-		<CvSection>
-			<h2>Skills</h2>
-			<div>
-				<p>Name: {skills[0].name}</p>
-				<p>Level: {skills[0].level}</p>
-				<p>Keywords: {skills[0].keywords.join(', ')}</p>
-			</div>
+		<CvSection className="w-[80%]">
+			<h2 className="text-3xl text-primary font-bold">Skills</h2>
+
+			{skills &&
+				skills.map(({ name, keywords, level }, index) => (
+					<Article key={index} title={`${name} - ${level}`} highlights={keywords} highlightsType="tags" />
+				))}
 		</CvSection>
 	);
 }

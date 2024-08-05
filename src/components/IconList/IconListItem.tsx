@@ -15,7 +15,7 @@ export default function IconListItem({ icon, value }: IconListItemProps) {
 	return (
 		<div className="flex gap-2">
 			{icon && icons.hasOwnProperty(icon) && <Image src={icons[icon]} alt={value} width="15" height="15" />}
-			<span>{value}</span>
+			<span className="text-wrap">{value}</span>
 		</div>
 	);
 }

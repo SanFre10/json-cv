@@ -15,7 +15,7 @@ export default function IconList({ list }: IconListProps) {
 			{list.map(({ icon, value, url }, index) => (
 				<li key={index}>
 					{url ? (
-						<a href={url}>
+						<a href={url} target="_blank">
 							<IconListItem icon={icon.toLowerCase()} value={value} />
 						</a>
 					) : (

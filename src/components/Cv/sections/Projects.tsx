@@ -1,24 +1,23 @@
-import React from 'react';
-import CvSection from './CvSection';
+import CvSection from '../CvSection';
 import { type CV } from '@/types/cv.d';
+import Article from '../Article';
 
 export default function Projects({ projects }: { projects: CV['projects'] }) {
 	return (
-		<CvSection>
-			<h2>Projects</h2>
-			<div>
-				<p>Name: {projects[0].name}</p>
-				<p>Start Date: {projects[0].startDate}</p>
-				<p>End Date: {projects[0].endDate}</p>
-				<p>Description: {projects[0].description}</p>
-				<p>Highlights:</p>
-				<ul>
-					<li>{projects[0].highlights[0]}</li>
-				</ul>
-				<p>
-					<a href={projects[0].url}>Project Link</a>
-				</p>
-			</div>
+		<CvSection className="w-[80%]">
+			<h2 className="text-3xl text-primary font-bold">Projects</h2>
+
+			{projects &&
+				projects.map(({ name, description, url, highlights, startDate, endDate }, index) => (
+					<Article
+						key={index}
+						title={name}
+						description={description}
+						highlights={highlights}
+						date={`${startDate} - ${endDate}`}
+						url={url}
+					/>
+				))}
 		</CvSection>
 	);
 }

@@ -1,17 +1,16 @@
-import React from 'react';
-import CvSection from './CvSection';
+import CvSection from '../CvSection';
 import { type CV } from '@/types/cv.d';
+import Article from '../Article';
 
 export default function Awards({ awards }: { awards: CV['awards'] }) {
 	return (
-		<CvSection>
-			<h2>Awards</h2>
-			<div>
-				<p>Title: {awards[0].title}</p>
-				<p>Date: {awards[0].date}</p>
-				<p>Awarder: {awards[0].awarder}</p>
-				<p>Summary: {awards[0].summary}</p>
-			</div>
+		<CvSection className="w-[80%]">
+			<h2 className="text-3xl text-primary font-bold">Awards</h2>
+
+			{awards &&
+				awards.map(({ title, date, awarder, summary }, index) => (
+					<Article key={index} title={`${title} - ${awarder}`} description={summary} date={`${date}`} />
+				))}
 		</CvSection>
 	);
 }

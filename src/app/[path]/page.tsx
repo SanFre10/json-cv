@@ -5,8 +5,8 @@ export default async function page({ params: { path } }: { params: { path: strin
 	const cvService = new CvService();
 	const cv = await cvService.getCv(path!);
 	return (
-		<main data-theme="light">
-			<Cv cv={cv}></Cv>
+		<main data-theme="light" className="p-5 h-screen flex justify-center">
+			{cv && <Cv cv={cv}></Cv>}
 		</main>
 	);
 }

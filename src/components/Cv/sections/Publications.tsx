@@ -1,18 +1,16 @@
-import React from 'react';
-import CvSection from './CvSection';
+import CvSection from '../CvSection';
 import { type CV } from '@/types/cv.d';
+import Article from '../Article';
 
 export default function Publications({ publications }: { publications: CV['publications'] }) {
 	return (
-		<CvSection>
-			<h2>Publications</h2>
-			<div>
-				<p>Title: {publications[0].name}</p>
-				<p>Publisher: {publications[0].publisher}</p>
-				<p>Release Date: {publications[0].releaseDate}</p>
-				<p>Website: {publications[0].url}</p>
-				<p>Summary: {publications[0].summary}</p>
-			</div>
+		<CvSection className="w-[80%]">
+			<h2 className="text-3xl text-primary font-bold">Publications</h2>
+
+			{publications &&
+				publications.map(({ name, publisher, releaseDate, summary, url }, index) => (
+					<Article key={index} title={`${name} - ${publisher}`} description={summary} date={`${releaseDate}`} url={url} />
+				))}
 		</CvSection>
 	);
 }
