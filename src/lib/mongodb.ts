@@ -1,14 +1,18 @@
-import { MongoClient, type MongoClientOptions, type Collection } from 'mongodb'
+import { MongoClient, Db } from 'mongodb';
 
 const uri = process.env.MONGODB_CONNECTION_URI as string
-const options: MongoClientOptions = {}
+let client: MongoClient;
+let db: Db;
 
-export const collections: { cv?: Collection } = {}
-export const client = new MongoClient(uri, options)
+export const connectToDatabase = async () => {
+    if (db) return db;
 
-export const connectToDatabase = async () =>{
-    await client.connect()
-    const db = client.db('database')
-    collections.cv = db.collection('cv')
-    return client
-}
+    if (!client) {
+        client = new MongoClient(uri);
+        await client.connect();
+    }
+
+    db = client.db(process.env.MONGODB_DB);
+
+    return db;
+};
