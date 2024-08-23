@@ -4,9 +4,7 @@ import Article from '../Article';
 
 export default function Work({ work }: { work: CV['work'] }) {
 	return (
-		<CvSection className="w-[80%]">
-			<h2 className="text-3xl text-primary font-bold">Work Experience</h2>
-
+		<CvSection title="Work experience">
 			{work &&
 				work.map(({ name, position, summary, highlights, url, startDate, endDate }, index) => (
 					<Article

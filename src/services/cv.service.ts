@@ -1,18 +1,12 @@
 import { client, connectToDatabase, collections } from "@/lib/mongodb";
 import { CV } from "@/types/cv";
-import { ObjectId } from "mongodb";
-
-interface CvDto {
-    _id: ObjectId;
-    path: string;
-    data: CV;
-}
+import { cvModel } from "@/types/cvModel";
 
 export class CvService {
-    getCv = async (path: string) => {
+    static getCv = async (path: string) => {
         try {
             await connectToDatabase();
-            const data = (await collections.cv?.findOne({ path: path })) as CvDto;
+            const data = (await collections.cv?.findOne({ path: path })) as cvModel;
             return data.data;
         }
         catch (e) {
@@ -23,7 +17,7 @@ export class CvService {
         }
     };
 
-    saveCv = async (path: string, passphrase: string, data: CV) => {        
+    static saveCv = async (path: string, passphrase: string, data: CV) => {        
         try {
             await connectToDatabase();
             const cv = (await collections.cv?.updateOne(

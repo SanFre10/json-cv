@@ -4,9 +4,7 @@ import Article from '../Article';
 
 export default function Projects({ projects }: { projects: CV['projects'] }) {
 	return (
-		<CvSection className="w-[80%]">
-			<h2 className="text-3xl text-primary font-bold">Projects</h2>
-
+		<CvSection title="Projects">
 			{projects &&
 				projects.map(({ name, description, url, highlights, startDate, endDate }, index) => (
 					<Article

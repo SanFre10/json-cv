@@ -7,6 +7,8 @@ export default function Article({
 	highlightsType = 'list',
 	date,
 	url,
+	titleSize,
+	textSize,
 }: {
 	title: string;
 	description?: string;
@@ -14,11 +16,13 @@ export default function Article({
 	highlightsType?: HighlightsType;
 	date?: string;
 	url?: string;
+	titleSize?: string;
+	textSize?: string;
 }) {
 	return (
-		<article className="mb-2">
+		<article className="mb-5">
 			<div className="flex relative">
-				<h3 className="text-xl content-center">
+				<h3 className={`${titleSize ? `text-${titleSize}` : 'text-lg'} content-center`}>
 					{url ? (
 						<a href={url} target="_blank" rel="noopener noreferrer">
 							{title}
@@ -27,15 +31,17 @@ export default function Article({
 						title
 					)}
 				</h3>
-				{date && <h4 className="content-center absolute right-0 text-neutral">{date}</h4>}
+				{date && <h4 className="content-center absolute right-0 text-neutral print:text-black">{date}</h4>}
 			</div>
-			{description && <p className="text-accent">{description}</p>}
+			{description && <p className="text-neutral print:text-black">{description}</p>}
 
 			{highlights &&
 				(highlightsType === 'list' ? (
 					<ul>
 						{highlights.map((highlight, index) => (
-							<li key={index}>{highlight}</li>
+							<li key={index} className={`${textSize ? `text-${textSize}` : 'text-lg'}`}>
+								{highlight}
+							</li>
 						))}
 					</ul>
 				) : (

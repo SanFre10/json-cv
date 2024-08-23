@@ -4,9 +4,7 @@ import Article from '../Article';
 
 export default function Publications({ publications }: { publications: CV['publications'] }) {
 	return (
-		<CvSection className="w-[80%]">
-			<h2 className="text-3xl text-primary font-bold">Publications</h2>
-
+		<CvSection title="Publications">
 			{publications &&
 				publications.map(({ name, publisher, releaseDate, summary, url }, index) => (
 					<Article key={index} title={`${name} - ${publisher}`} description={summary} date={`${releaseDate}`} url={url} />

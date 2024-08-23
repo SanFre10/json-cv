@@ -15,19 +15,25 @@ import Projects from '@/components/Cv/sections/Projects';
 
 export default function Cv({ cv }: { cv: CV }) {
 	return (
-		<div data-theme="cvTheme1" className="max-w-[1000px] p-10 font-mono rounded select-none">
+		<div data-theme="cvThemeLight" className="w-[1000px] font-mono rounded select-none">
 			{cv.basics && <Basics basics={cv.basics}></Basics>}
-			{cv.work && <Work work={cv.work}></Work>}
-			{cv.volunteer && <Volunteer volunteer={cv.volunteer}></Volunteer>}
-			{cv.education && <Education education={cv.education}></Education>}
-			{cv.awards && <Awards awards={cv.awards}></Awards>}
-			{cv.certificates && <Certificates certificates={cv.certificates}></Certificates>}
-			{cv.projects && <Projects projects={cv.projects}></Projects>}
-			{cv.publications && <Publications publications={cv.publications}></Publications>}
-			{cv.skills && <Skills skills={cv.skills}></Skills>}
-			{cv.languages && <Languages languages={cv.languages}></Languages>}
-			{cv.interests && <Interests interests={cv.interests}></Interests>}
-			{cv.references && <References references={cv.references}></References>}
+			<div className="flex">
+				<div className="w-[70%]">
+					{cv.work && <Work work={cv.work}></Work>}
+					{cv.volunteer && <Volunteer volunteer={cv.volunteer}></Volunteer>}
+					{cv.education && <Education education={cv.education}></Education>}
+					{cv.awards && <Awards awards={cv.awards}></Awards>}
+					{cv.certificates && <Certificates certificates={cv.certificates}></Certificates>}
+					{cv.projects && <Projects projects={cv.projects}></Projects>}
+					{cv.publications && <Publications publications={cv.publications}></Publications>}
+				</div>
+				<div className="w-[30%] bg-base-200">
+					{cv.skills && <Skills skills={cv.skills}></Skills>}
+					{cv.languages && <Languages languages={cv.languages}></Languages>}
+					{cv.interests && <Interests interests={cv.interests}></Interests>}
+					{cv.references && <References references={cv.references}></References>}
+				</div>
+			</div>
 		</div>
 	);
 }
