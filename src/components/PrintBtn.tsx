@@ -4,7 +4,7 @@ export default function PrintBtn() {
 		window.print();
 	};
 	return (
-		<button className="bg-red" onClick={handlePrintClick}>
+		<button className="btn" onClick={handlePrintClick}>
 			Print
 		</button>
 	);
