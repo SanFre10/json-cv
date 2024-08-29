@@ -79,30 +79,32 @@ export default function Page() {
 
 	return (
 		<>
-			<main className="flex h-screen">
-				<div className="flex-1 m-10 rounded-lg">
+			<main className="flex h-screen p-10">
+				<div className="w-2/3 mr-5 justify-center overflow-auto">
 					{searchParams && searchParams.get('path') && searchParams.get('passphrase') && !editPath.current && !editPassphrase.current ? (
-						<div className="skeleton flex-1 h-screen w-full"></div>
+						<div className="skeleton h-full w-full"></div>
 					) : (
 						<Cv cv={cvData} />
 					)}
 				</div>
-				<div className="flex-1 m-10">
-					<button onClick={handleResetClick} className="btn btn-warning">
-						Reset
-					</button>
+				<div className="w-1/3 h-full">
+					<div className="flex gap-1">
+						<button onClick={handleResetClick} className="btn btn-warning">
+							Reset
+						</button>
+						<button onClick={handleSaveClick} className="btn btn-success">
+							Save
+						</button>
+					</div>
 					<h3>{error}</h3>
 					<textarea
-						className={`w-full h-full p-10 rounded-lg border focus:outline-none ${error ? 'border-red-700' : ''}`}
+						className={`textarea resize-none w-full h-5/6 p-10 rounded-lg focus:outline-none ${error ? 'border-red-700' : ''}`}
 						spellCheck={false}
 						placeholder="Enter your text here"
 						value={textareaValue}
 						onChange={handleTextareaChange}
 					/>
 				</div>
-				<button onClick={handleSaveClick} className="btn btn-success absolute right-0 bottom-0">
-					Save
-				</button>
 			</main>
 			<dialog id="saveModal" className="modal">
 				<div className="modal-box">

@@ -9,9 +9,11 @@ export default function Basics({ basics }: { basics: CV['basics'] }) {
 			<div className="w-[70%] p-10">
 				<h1 className="text-5xl text-primary print:text-black font-bold">{basics.name}</h1>
 				<p className="text-3xl text-secondary print:text-black font-bold">{basics.label}</p>
-				<p>
-					{basics.location.city}, {basics.location.region}
-				</p>
+				{basics.location && (
+					<p>
+						{basics.location.city}, {basics.location.region}
+					</p>
+				)}
 				<div className="mt-5">
 					<h3 className="text-2xl text-secondary print:text-black font-bold">Summary</h3>
 					<p className="text-md text-newutral print:text-black text-balance">{basics.summary}</p>
