@@ -9,9 +9,12 @@ import { cvSchema } from '@/schemas/cvSchema';
 
 import jonhdoe from '@/jonhdoe.json';
 import empty from '@/empty.json';
+import { Locales } from '@/utils/locale/locale';
 
 export default function Page() {
 	const [cvData, setCvData] = useState(empty as CV);
+	const [locale, setLocale] = useState('es' as Locales);
+	const [theme, setTheme] = useState('cvThemeLight');
 	const [textareaValue, setTextareaValue] = useState(JSON.stringify(empty, null, 2));
 	const [error, setError] = useState('');
 
@@ -45,10 +48,10 @@ export default function Page() {
 		const path = (document.querySelector('input[name="path"]') as HTMLInputElement).value;
 		const passphrase = (document.querySelector('input[name="passphrase"]') as HTMLInputElement).value;
 		const data = cvData;
-		console.log(data);
+
 		fetch('/api/cv', {
 			method: 'POST',
-			body: JSON.stringify({ path, passphrase, data }),
+			body: JSON.stringify({ path, passphrase, data, locale, theme }),
 		}).then((res) => {
 			if (res.ok) {
 				(document.getElementById('saveModal') as HTMLFormElement).close();
@@ -61,6 +64,14 @@ export default function Page() {
 		setCvData(empty);
 	};
 
+	const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+		setTheme(event.target.value);
+	};
+
+	const handleLocaleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+		setLocale(event.target.value as Locales);
+	};
+
 	useEffect(() => {
 		if (searchParams) {
 			editPath.current = searchParams.get('path');
@@ -69,8 +80,10 @@ export default function Page() {
 				fetch(`/api/cv?path=${editPath.current}&passphrase=${editPassphrase.current}`).then(async (res) => {
 					if (res.ok) {
 						const data = await res.json();
-						setCvData(data);
-						setTextareaValue(JSON.stringify(data, null, 2));
+						setCvData(data.cv);
+						setTextareaValue(JSON.stringify(data.cv, null, 2));
+						setLocale(data.locale);
+						setTheme(data.theme);
 					}
 				});
 			}
@@ -84,11 +97,27 @@ export default function Page() {
 					{searchParams && searchParams.get('path') && searchParams.get('passphrase') && !editPath.current && !editPassphrase.current ? (
 						<div className="skeleton h-full w-full"></div>
 					) : (
-						<Cv cv={cvData} />
+						<Cv cv={cvData} locale={locale} theme={theme} />
 					)}
 				</div>
 				<div className="w-1/3 h-full">
 					<div className="flex gap-1">
+						<select onChange={handleLocaleChange} className="select">
+							<option value="en" selected={locale === 'en'}>
+								en
+							</option>
+							<option value="es" selected={locale === 'es'}>
+								es
+							</option>
+						</select>
+						<select onChange={handleThemeChange} className="select">
+							<option value="cvThemeLight" selected={theme === 'cvThemeLight'}>
+								Light
+							</option>
+							<option value="cvThemeDark" selected={theme === 'cvThemeDark'}>
+								Dark
+							</option>
+						</select>
 						<button onClick={handleResetClick} className="btn btn-warning">
 							Reset
 						</button>

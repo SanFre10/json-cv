@@ -1,6 +1,7 @@
 import { connectToDatabase } from "@/lib/mongodb";
 import { CV } from "@/types/cv";
 import { cvModel } from "@/types/cvModel";
+import { Locales } from "@/utils/locale/locale";
 
 export class CvService {
     static getCv = async (path: string): Promise<CV | null> => {
@@ -31,13 +32,13 @@ export class CvService {
         return null;
     }
 
-    static getCvByPassphrase = async (path: string, passphrase: string): Promise<CV | null> => {
+    static getCvModelByPassphrase = async (path: string, passphrase: string): Promise<cvModel | null> => {
         try {
             const db = await connectToDatabase();
             const collection = db.collection<cvModel>('cv');
         
             const data = await collection.findOne({ path: path, passphrase: passphrase });
-            return data?.data;
+            return data;
         }
         catch (e) {
             console.error(e);
@@ -45,14 +46,14 @@ export class CvService {
         return null;
     }
 
-    static saveCv = async (path: string, passphrase: string, data: CV) => {        
+    static saveCv = async (path: string, passphrase: string, data: CV, locale: Locales, theme: string) => {        
         try {
             const db = await connectToDatabase();
             const collection = db.collection<cvModel>('cv');
 
             const cv = (collection.updateOne(
                 { path: path },
-                { $set: { passphrase: passphrase, data: data } },
+                { $set: { passphrase: passphrase, data: data, locale:locale, theme:theme } },
                 { upsert: true }
             ))
             return cv;

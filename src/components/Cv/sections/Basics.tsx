@@ -2,8 +2,9 @@ import CvSection from '../CvSection';
 import { type CV } from '@/types/cv.d';
 import IconList from '@/components/IconList/IconList';
 import Avatar from '@/components/Avatar';
+import { getLocaleText, Locales } from '@/utils/locale/locale';
 
-export default function Basics({ basics }: { basics: CV['basics'] }) {
+export default function Basics({ basics, locale }: { basics: CV['basics']; locale: Locales }) {
 	return (
 		<div className="flex justify-between">
 			<div className="w-[70%] p-10">
@@ -15,7 +16,7 @@ export default function Basics({ basics }: { basics: CV['basics'] }) {
 					</p>
 				)}
 				<div className="mt-5">
-					<h3 className="text-2xl text-secondary print:text-black font-bold">Summary</h3>
+					<h3 className="text-2xl text-secondary print:text-black font-bold">{getLocaleText('Summary', locale)}</h3>
 					<p className="text-md text-newutral print:text-black text-balance">{basics.summary}</p>
 				</div>
 			</div>

@@ -1,0 +1,20 @@
+{
+    "en": {
+        "awards": "Awards",
+        "education": "Education",
+        "experience": "Experience",
+        "languages": "Languages",
+        "projects": "Projects",
+        "skills": "Skills",
+        "summary": "Summary"
+    },
+    "es": {
+        "awards": "Premios",
+        "education": "Educación",
+        "experience": "Experiencia",
+        "languages": "Idiomas",
+        "projects": "Proyectos",
+        "skills": "Habilidades",
+        "summary": "Resumen"
+    }
+}

@@ -13,25 +13,27 @@ import Interests from '@/components/Cv/sections/Interests';
 import References from '@/components/Cv/sections/References';
 import Projects from '@/components/Cv/sections/Projects';
 
-export default function Cv({ cv }: { cv: CV }) {
+import { Locales } from '@/utils/locale/locale';
+
+export default function Cv({ cv, locale = 'es', theme = 'cvThemeLight' }: { cv: CV; locale: Locales; theme: string }) {
 	return (
-		<div data-theme="cvThemeLight" className="w-[1000px] font-mono rounded select-none">
-			{cv.basics && <Basics basics={cv.basics}></Basics>}
+		<div data-theme={theme} className="w-[1000px] font-mono rounded select-none">
+			{cv.basics && <Basics basics={cv.basics} locale={locale}></Basics>}
 			<div className="flex">
 				<div className="w-[70%]">
-					{cv.work && <Work work={cv.work}></Work>}
-					{cv.volunteer && <Volunteer volunteer={cv.volunteer}></Volunteer>}
-					{cv.education && <Education education={cv.education}></Education>}
-					{cv.awards && <Awards awards={cv.awards}></Awards>}
-					{cv.certificates && <Certificates certificates={cv.certificates}></Certificates>}
-					{cv.projects && <Projects projects={cv.projects}></Projects>}
-					{cv.publications && <Publications publications={cv.publications}></Publications>}
+					{cv.work && <Work work={cv.work} locale={locale}></Work>}
+					{cv.volunteer && <Volunteer volunteer={cv.volunteer} locale={locale}></Volunteer>}
+					{cv.education && <Education education={cv.education} locale={locale}></Education>}
+					{cv.awards && <Awards awards={cv.awards} locale={locale}></Awards>}
+					{cv.certificates && <Certificates certificates={cv.certificates} locale={locale}></Certificates>}
+					{cv.projects && <Projects projects={cv.projects} locale={locale}></Projects>}
+					{cv.publications && <Publications publications={cv.publications} locale={locale}></Publications>}
 				</div>
 				<div className="w-[30%] bg-base-200">
-					{cv.skills && <Skills skills={cv.skills}></Skills>}
-					{cv.languages && <Languages languages={cv.languages}></Languages>}
-					{cv.interests && <Interests interests={cv.interests}></Interests>}
-					{cv.references && <References references={cv.references}></References>}
+					{cv.skills && <Skills skills={cv.skills} locale={locale}></Skills>}
+					{cv.languages && <Languages languages={cv.languages} locale={locale}></Languages>}
+					{cv.interests && <Interests interests={cv.interests} locale={locale}></Interests>}
+					{cv.references && <References references={cv.references} locale={locale}></References>}
 				</div>
 			</div>
 		</div>

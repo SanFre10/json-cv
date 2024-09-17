@@ -10,23 +10,24 @@ export async function GET(req: NextRequest) {
     if(!path) return NextResponse.json({ message: "Not found" }, { status: 404 });
     const passphrase = searchParams.get('passphrase');
     
+    console.log("aaaaaaaaaaaa")
     if (passphrase) {
-        const cv = await CvService.getCvByPassphrase(path, passphrase);
+        const cv = await CvService.getCvModelByPassphrase(path, passphrase);
         if (cv === null) return NextResponse.json({ message: "Not found" }, { status: 404 });
-        return NextResponse.json(cv);
+        return NextResponse.json({cv: cv.data, locale: cv.locale, theme: cv.theme}, { status: 200 });
     }
     
     const cv = await CvService.getCvModel(path);
     if (cv === null || cv.isPrivate) return NextResponse.json({ message: "Not found" }, { status: 404 });
     
-    return NextResponse.json(cv.data);
+    return NextResponse.json({cv: cv.data, locale: cv.locale, theme: cv.theme}, { status: 200 });
 }
 
 export async function POST(req: NextRequest){
     const data = await req.json() as cvModel;
     try {
         const cv = cvSchema.parse(data.data) as CV;
-        CvService.saveCv(data.path, data.passphrase, cv);
+        CvService.saveCv(data.path, data.passphrase, cv, data.locale, data.theme);
         return NextResponse.json({ message: "Success" })
     }
     catch (e) {

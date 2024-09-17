@@ -1,10 +1,11 @@
 import CvSection from '../CvSection';
 import { type CV } from '@/types/cv.d';
 import Article from '../Article';
+import { getLocaleText, Locales } from '@/utils/locale/locale';
 
-export default function Education({ education }: { education: CV['education'] }) {
+export default function Education({ education, locale }: { education: CV['education']; locale: Locales }) {
 	return (
-		<CvSection title="Education">
+		<CvSection title={getLocaleText('Education', locale)}>
 			{education &&
 				education.map(({ area, courses, institution, score, studyType, url, startDate, endDate }, index) => (
 					<Article
