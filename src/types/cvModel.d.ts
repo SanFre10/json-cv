@@ -1,5 +1,7 @@
 import { Locales } from "@/utils/locale/locale";
 
+type Theme = 'cvThemeLight' | 'cvThemeDark';
+
 export interface cvModel {
     _id?: ObjectId;
     number: number;
@@ -7,6 +9,6 @@ export interface cvModel {
     passphrase: string;
     data: CV;
     locale: Locales;
-    theme: string;
+    theme: Theme;
     isPrivate: boolean;
 }

@@ -10,11 +10,12 @@ import { cvSchema } from '@/schemas/cvSchema';
 import jonhdoe from '@/jonhdoe.json';
 import empty from '@/empty.json';
 import { Locales } from '@/utils/locale/locale';
+import { Theme } from '@/types/cvModel';
 
 export default function Page() {
 	const [cvData, setCvData] = useState(empty as CV);
 	const [locale, setLocale] = useState('es' as Locales);
-	const [theme, setTheme] = useState('cvThemeLight');
+	const [theme, setTheme] = useState('cvThemeLight' as Theme);
 	const [textareaValue, setTextareaValue] = useState(JSON.stringify(empty, null, 2));
 	const [error, setError] = useState('');
 
@@ -65,7 +66,7 @@ export default function Page() {
 	};
 
 	const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-		setTheme(event.target.value);
+		setTheme(event.target.value as Theme);
 	};
 
 	const handleLocaleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

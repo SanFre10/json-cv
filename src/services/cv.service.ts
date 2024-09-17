@@ -1,6 +1,6 @@
 import { connectToDatabase } from "@/lib/mongodb";
 import { CV } from "@/types/cv";
-import { cvModel } from "@/types/cvModel";
+import { cvModel, Theme } from "@/types/cvModel";
 import { Locales } from "@/utils/locale/locale";
 
 export class CvService {
@@ -46,7 +46,7 @@ export class CvService {
         return null;
     }
 
-    static saveCv = async (path: string, passphrase: string, data: CV, locale: Locales, theme: string) => {        
+    static saveCv = async (path: string, passphrase: string, data: CV, locale: Locales, theme: Theme) => {        
         try {
             const db = await connectToDatabase();
             const collection = db.collection<cvModel>('cv');

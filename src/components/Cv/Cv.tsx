@@ -14,8 +14,9 @@ import References from '@/components/Cv/sections/References';
 import Projects from '@/components/Cv/sections/Projects';
 
 import { Locales } from '@/utils/locale/locale';
+import { Theme } from '@/types/cvModel';
 
-export default function Cv({ cv, locale = 'es', theme = 'cvThemeLight' }: { cv: CV; locale: Locales; theme: string }) {
+export default function Cv({ cv, locale = 'es', theme = 'cvThemeLight' }: { cv: CV; locale: Locales; theme: Theme }) {
 	return (
 		<div data-theme={theme} className="w-[1000px] font-mono rounded select-none">
 			{cv.basics && <Basics basics={cv.basics} locale={locale}></Basics>}
