@@ -10,7 +10,6 @@ export async function GET(req: NextRequest) {
     if(!path) return NextResponse.json({ message: "Not found" }, { status: 404 });
     const passphrase = searchParams.get('passphrase');
     
-    console.log("aaaaaaaaaaaa")
     if (passphrase) {
         const cv = await CvService.getCvModelByPassphrase(path, passphrase);
         if (cv === null) return NextResponse.json({ message: "Not found" }, { status: 404 });
