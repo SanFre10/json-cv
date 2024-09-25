@@ -21,25 +21,25 @@ export default function Article({
 }) {
 	return (
 		<article className="mb-5">
-			<div className="flex relative">
-				<h3 className={`${titleSize ? `text-${titleSize}` : 'text-lg'} content-center`}>
+			<div className="flex relative justify-between">
+				<h3 className={`${titleSize ? `text-${titleSize}` : 'text-lg'} content-center font-bold`}>
 					{url ? (
-						<a href={url} target="_blank" rel="noopener noreferrer">
+						<a href={url} target="_blank" rel="noopener noreferrer" className="hover:underline">
 							{title}
 						</a>
 					) : (
 						title
 					)}
 				</h3>
-				{date && <h4 className="content-center absolute right-0 text-neutral print:text-black">{date}</h4>}
+				{date && <h4 className="content-center text-neutral font-bold print:text-black">{date}</h4>}
 			</div>
-			{description && <p className="text-neutral print:text-black">{description}</p>}
+			{description && <p className="text-neutral text-sm text-balance print:text-black">{description}</p>}
 
 			{highlights &&
 				(highlightsType === 'list' ? (
-					<ul>
+					<ul className="list-disc pl-3 pt-3">
 						{highlights.map((highlight, index) => (
-							<li key={index} className={`${textSize ? `text-${textSize}` : 'text-lg'}`}>
+							<li key={index} className={`${textSize ? `text-${textSize}` : 'text-sm'} text-balance p-1`}>
 								{highlight}
 							</li>
 						))}

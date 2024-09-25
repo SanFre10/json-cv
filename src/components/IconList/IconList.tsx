@@ -11,11 +11,11 @@ interface IconListProps {
 
 export default function IconList({ list }: IconListProps) {
 	return (
-		<ul>
+		<ul className="flex space-x-6">
 			{list.map(({ icon, value, url }, index) => (
-				<li key={index}>
+				<li key={index} className="flex items-center space-x-2 hover:underline">
 					{url ? (
-						<a href={url} target="_blank">
+						<a href={url} target="_blank" className="flex items-center space-x-2">
 							<IconListItem icon={icon.toLowerCase()} value={value} />
 						</a>
 					) : (

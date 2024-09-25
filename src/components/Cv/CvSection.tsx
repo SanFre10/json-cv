@@ -10,8 +10,8 @@ export default function CvSection({
 	title?: string;
 }>) {
 	return (
-		<section className={`p-10 ${className}`}>
-			{title && <h2 className="text-2xl text-secondary print:text-black font-bold">{title}</h2>}
+		<section className={`pr-10 pl-10 pb-5 ${className}`}>
+			{title && <h2 className="text-xl text-secondary print:text-black font-bold">{title}</h2>}
 			{children}
 		</section>
 	);

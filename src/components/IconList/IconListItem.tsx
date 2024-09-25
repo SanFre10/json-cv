@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import x from '@/assets/icons/x.svg';
 
 interface IconListItemProps {
 	icon: string;
@@ -7,15 +6,20 @@ interface IconListItemProps {
 }
 
 const icons: { [key: string]: any } = {
-	x: x,
-	twitter: x,
+	x: '/assets/icons/x.svg',
+	twitter: '/assets/icons/x.svg',
+	linkedin: '/assets/icons/linkedin.svg',
+	github: '/assets/icons/github.svg',
+	email: '/assets/icons/email.svg',
+	phone: '/assets/icons/phone.svg',
+	website: '/assets/icons/website.svg',
 };
 
 export default function IconListItem({ icon, value }: IconListItemProps) {
 	return (
-		<div className="flex gap-2">
-			{icon && icons.hasOwnProperty(icon) && <Image src={icons[icon]} alt={value} width="15" height="15" />}
-			<span className="text-wrap">{value}</span>
-		</div>
+		<>
+			{icon && icons.hasOwnProperty(icon) && <Image src={icons[icon]} alt={value} width="20" height="20" />}
+			<span className="text-sm">{value}</span>
+		</>
 	);
 }

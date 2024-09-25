@@ -6,7 +6,7 @@ import { getLocaleText, Locales } from '@/utils/locale/locale';
 export default function languages({ languages, locale }: { languages: CV['languages']; locale: Locales }) {
 	return (
 		<CvSection title={getLocaleText('Languages', locale)}>
-			{languages && languages.map(({ fluency, language }, index) => <Article key={index} title={`${language} - ${fluency}`} titleSize="xs" />)}
+			{languages && languages.map(({ fluency, language }, index) => <Article key={index} title={`${language} - ${fluency}`} titleSize="md" />)}
 		</CvSection>
 	);
 }
