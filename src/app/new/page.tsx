@@ -46,13 +46,14 @@ export default function Page() {
 	const handleModalSave = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		event.preventDefault();
 
-		const path = (document.querySelector('input[name="path"]') as HTMLInputElement).value;
-		const passphrase = (document.querySelector('input[name="passphrase"]') as HTMLInputElement).value;
+		const path = editPath?.current || (document.querySelector('input[name="path"]') as HTMLInputElement).value;
+		const passphrase = editPassphrase?.current || (document.querySelector('input[name="passphrase"]') as HTMLInputElement).value;
+		const isPrivate = (document.querySelector('input[name="isPrivate"]') as HTMLInputElement).checked;
 		const data = cvData;
 
 		fetch('/api/cv', {
 			method: 'POST',
-			body: JSON.stringify({ path, passphrase, data, locale, theme }),
+			body: JSON.stringify({ path, passphrase, data, locale, theme, isPrivate }),
 		}).then((res) => {
 			if (res.ok) {
 				(document.getElementById('saveModal') as HTMLFormElement).close();
@@ -138,14 +139,31 @@ export default function Page() {
 			</main>
 			<dialog id="saveModal" className="modal">
 				<div className="modal-box">
-					<input type="text" name="path" placeholder="Path" className="input w-full max-w-xs" defaultValue={editPath.current || ''} />
-					<input
-						type="text"
-						name="passphrase"
-						placeholder="Passphrase"
-						className="input w-full max-w-xs"
-						defaultValue={editPassphrase.current || ''}
-					/>
+					{!editPath.current && !editPassphrase.current && (
+						<>
+							<input
+								type="text"
+								name="path"
+								placeholder="Path"
+								className="input w-full max-w-xs"
+								defaultValue={editPath.current || ''}
+							/>
+							<input
+								type="text"
+								name="passphrase"
+								placeholder="Passphrase"
+								className="input w-full max-w-xs"
+								defaultValue={editPassphrase.current || ''}
+							/>
+						</>
+					)}
+					<div className="form-control">
+						<label className="label cursor-pointer">
+							<span className="label-text">Private</span>
+							<input type="checkbox" name="isPrivate" className="toggle" />
+						</label>
+					</div>
+
 					<div className="modal-action">
 						<form method="dialog">
 							<button onClick={handleModalSave} className="btn btn-success">

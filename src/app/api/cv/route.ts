@@ -26,7 +26,7 @@ export async function POST(req: NextRequest){
     const data = await req.json() as cvModel;
     try {
         const cv = cvSchema.parse(data.data) as CV;
-        CvService.saveCv(data.path, data.passphrase, cv, data.locale, data.theme);
+        CvService.saveCv(data.path, data.passphrase, cv, data.locale, data.theme, data.isPrivate);
         return NextResponse.json({ message: "Success" })
     }
     catch (e) {
