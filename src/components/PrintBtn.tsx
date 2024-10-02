@@ -4,7 +4,7 @@ export default function PrintBtn() {
 		window.print();
 	};
 	return (
-		<button className="btn" onClick={handlePrintClick}>
+		<button className="btn join-item" onClick={handlePrintClick}>
 			Print
 		</button>
 	);

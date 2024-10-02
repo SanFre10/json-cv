@@ -15,7 +15,7 @@ export default function ModalEdit({ path, passphrase }: { path: string; passphra
 	};
 	return (
 		<>
-			<button className="btn" onClick={handleEditClick}>
+			<button className="btn join-item" onClick={handleEditClick}>
 				Edit
 			</button>
 			<dialog id="editModal" className="modal">
