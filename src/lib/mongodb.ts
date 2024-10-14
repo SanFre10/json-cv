@@ -22,7 +22,6 @@ export const connectToDatabase = async () => {
       client = globalWithMongo._mongoClient;
     } else {
       // In production mode, it's best to not use a global variable.
-      console.log(uri);
       client = new MongoClient(uri);
       console.log("New client");
     }
