@@ -55,7 +55,13 @@ export class CvService {
                 path: { $regex: `^${path}`, $options: "i" }, // Case-insensitive search
                 isPrivate: false
             }).limit(10).toArray();
-            return data;
+            return data.map((cv) => {
+                return {
+                    data: cv.data,
+                    path: cv.path
+                } as cvModel
+            });
+
         }
         catch (e) {
             console.error(e);
